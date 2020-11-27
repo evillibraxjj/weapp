@@ -1,0 +1,3 @@
+<view class="flex justify-between " hover-class="none" hover-stop-propagation="false" style="margin:30rpx;">
+  <text>{{ storeHoliday }}</text>
+</view>

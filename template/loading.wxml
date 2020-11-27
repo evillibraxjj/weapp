@@ -1,0 +1,9 @@
+<template name="loading">
+  <view class="loading" catch:touchmove catch:tap>
+    <view></view>
+    <view></view>
+    <view></view>
+    <view></view>
+    <view></view>
+  </view>
+</template>

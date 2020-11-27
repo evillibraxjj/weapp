@@ -1,0 +1,10 @@
+<view class="page">
+  <slot />
+</view>
+<view wx:if="{{ !storeToken }}" class="login {{ loginShowModel }}" catch:tap="bindChenaLogin" catch:touchmove>
+  <view>
+    <button loading="{{loginLoading}}" hover-class="button-hover" open-type="getUserInfo" bind:getuserinfo="bindLogin" catch:tap>
+      <text>登录</text>
+    </button>
+  </view>
+</view>

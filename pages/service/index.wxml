@@ -1,0 +1,6 @@
+<import src="/template/loading.wxml" />
+<template is="loading" wx:if="{{ loading }}" />
+<my-page>
+  <view class="">{{ storeUserPark.parkName || storeDefaultPark.parkName }}</view>
+  <view class="">{{ storeUserCar.carNumber }}</view>
+</my-page>

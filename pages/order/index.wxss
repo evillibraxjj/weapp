@@ -1,0 +1,15 @@
+.image-avatar {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-avatar image {
+  width: 100%;
+}
+
+.image-avatar canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
