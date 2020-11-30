@@ -1,3 +1,4 @@
+const cache = {}
 const fly = new require('../lib/flyio')()
 const host = () => {
   if (__wxConfig && __wxConfig.envVersion) {
@@ -11,6 +12,42 @@ const host = () => {
   return 'https://api.loookauto.com'
 }
 
+const getRequestCache = (request) => {
+  const keyUrl = request.baseURL + request.url
+  if (request.cache > 0 && cache.hasOwnProperty(keyUrl)) {
+    const urlCache = cache[keyUrl]
+    const keyBody = JSON.stringify(request.body)
+    if (urlCache.hasOwnProperty(keyBody)) {
+      const bodyCache = urlCache[keyBody]
+      const time = bodyCache.time
+      const curTime = new Date(time.setMinutes(time.getMinutes() + request.cache))
+      //缓存时间 单位分钟
+      if (new Date() < curTime) return bodyCache.data
+      else {
+        delete urlCache[keyBody]
+        if (Object.keys(cache[keyUrl]).length == 0) delete cache[keyUrl]
+      }
+    }
+  }
+  return request
+}
+
+const setRequestCache = (request, data) => {
+  if (data && request.cache > 0) {
+    const keyUrl = `${request.baseURL}${request.url}`
+    const keyBody = `${JSON.stringify(request.body)}`
+    Object.assign(cache, {
+      [keyUrl]: {
+        ...cache[keyUrl],
+        [keyBody]: {
+          time: new Date(),
+          data
+        }
+      }
+    })
+  }
+}
+
 fly.interceptors.request.use((request, promise) => {
   const token = wx.getStorageSync('accessToken')
   if (request.token != false && !token) {
@@ -21,18 +58,20 @@ fly.interceptors.request.use((request, promise) => {
       'content-type': 'application/json',
       'access_token': wx.getStorageSync('accessToken')
     }
+    return getRequestCache(request)
   }
 })
 
 fly.interceptors.response.use(
   (response) => {
-    const { status } = response
+    const { status, request } = response
     switch (status) {
       case 200:
         const { code, data, message } = response.data
         switch (parseInt(code)) {
           case 200:
             if (message) wx.$showToast(message)
+            setRequestCache(request, data)
             return data || code
           case 401:
             wx.$showToast('请登录')

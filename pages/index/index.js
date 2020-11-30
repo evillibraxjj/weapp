@@ -1,5 +1,5 @@
 
-import loadData from './loadData'
+import { loadData } from './loadData'
 
 wx.$create(wx.$store, {
   data: {
