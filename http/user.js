@@ -1,6 +1,6 @@
 module.exports = {
   userLogin: async (data) => {
-    const accessToken = (await await wx.$fly.post('/userService/login/customer', data, { token: false }))?.accessToken || null
+    const accessToken = (await wx.$fly.post('/userService/login/customer', data, { token: false }))?.accessToken || null
     return accessToken && await wx.$http.user.getUserInfo(accessToken) && !wx.$event.emit('userLogin')
   },
   getUserInfo: async (accessToken) => {
@@ -20,7 +20,7 @@ module.exports = {
       wx.$store.data.storeToken = wx.getStorageSync('accessToken')
       return true
     }
-    wx.removeStorageSync('accessToken');
+    wx.removeStorageSync('accessToken')
     return false
   }
 }

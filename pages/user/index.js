@@ -1,15 +1,21 @@
+
+import { appLoad, userLogout } from './loadData'
+
 wx.$create(wx.$store, {
   data: {
     storeUserInfo: null,
     storeDefaultPark: null
   },
-  onReady () {
-    const { loadData } = this
-    wx.$store.data.storeAppLoad && loadData()
-    wx.$event.on('appLoad', this, () => loadData())
-    wx.$event.on('userLogin', this, () => loadData())
+  onShow () {
+    wx.$http.user.getUserInfo()
   },
-  loadData () {
-    console.info('user loadData')
+  onReady () {
+    wx.$store.data.storeAppLoad && appLoad(this)
+    wx.$event.on('appLoad', this, () => appLoad(this))
+    wx.$event.on('userLogin', this, () => appLoad(this))
+    wx.$event.on('userLogout', this, () => userLogout(this))
+  },
+  bindClick () {
+    wx.$store.logout()
   }
 })

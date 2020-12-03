@@ -4,9 +4,10 @@ wx.$create({
     multipleSlots: true
   },
   data: {
+    storeAppLoad: null,
     storeToken: null,
     loginLoading: false,
-    loginShowModel: false
+    loginShowModel: null
   },
   pageLifetimes: {
     hide () {
@@ -15,13 +16,13 @@ wx.$create({
   },
   methods: {
     async bindChenaLogin () {
-      this.setData({ loginShowModel: !this.data.loginShowModel && (code = (await wx.login())?.code || null) != null || false })
+      this.setData({ loginShowModel: !this.data.loginShowModel && (code = (await wx.login())?.code) != undefined || false })
     },
     async bindLogin (e) {
       this.setData({ loginLoading: true }, async () => {
         e && e.detail
           && (await wx.$http.user.userLogin({ code, wxUserInfo: e.detail }))
-          && !(this.setData({ loginShowModel: false, loginLoading: false }, () => wx.$store.update()))
+          && (this.setData({ loginShowModel: false, loginLoading: false }, wx.$store.update) || true)
           || this.setData({ loginLoading: false })
       })
     }

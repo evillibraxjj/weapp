@@ -1,4 +1,4 @@
-import loadData from './loadData'
+import { appLoad, userLogin } from './loadData'
 wx.$create(wx.$store, {
   data: {
     pageLoading: new Date().getTime(),
@@ -9,8 +9,9 @@ wx.$create(wx.$store, {
     storeDefaultPark: null
   },
   onReady () {
-    wx.$store.data.storeAppLoad && loadData(this)
-    wx.$event.on('appLoad', this, () => loadData(this))
-    wx.$event.on('userLogin', this, () => loadData(this))
+    wx.$store.data.storeAppLoad && appLoad(this)
+    wx.$event.on('appLoad', this, () => appLoad(this))
+    wx.$event.on('userLogin', this, () => appLoad(this))
+    wx.$event.on('userLogin', this, () => userLogin(this))
   }
 })

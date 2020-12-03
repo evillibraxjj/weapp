@@ -1,3 +1,5 @@
+@import "/style/flex.wxss";
+
 .page {
   width: 100vw;
   height: 100vh;
@@ -17,7 +19,6 @@
   opacity: 0;
 }
 
-
 .login::after {
   content: '';
   position: fixed;
@@ -30,10 +31,56 @@
   opacity: 0;
 }
 
+@keyframes modelShow {
+  0% {
+    opacity: 0;
+    top: -50vh;
+    left: 50vw;
+    right: 50vw;
+    width: 0;
+    overflow: hidden;
+  }
+
+  80% {
+    opacity: 1;
+    top: 30vh;
+    left: 5vw;
+    right: 5vw;
+  }
+
+  100% {
+    opacity: 1;
+    top: 25vh;
+    left: 10vw;
+    right: 10vw;
+    overflow: hidden;
+  }
+}
+
 .login.true {
   opacity: 1;
+  animation: modelShow 0.5s ease-out;
 }
 
 .login.true::after {
   opacity: 0.1;
+}
+
+.login.true>view {
+  width: 100%;
+  height: 500rpx;
+  padding: 30rpx;
+  border-radius: 30rpx;
+  background: white;
+}
+
+.login button {
+  width: 100%;
+  font-size: 28rpx;
+  height: 72rpx;
+  margin: 0;
+  background-color: var(--red);
+  color: white;
+  font-size: 28rpx;
+  font-weight: normal;
 }

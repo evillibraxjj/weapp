@@ -8,7 +8,6 @@ wx.$showToast = title => {
 
 require('./fly')
 require('./event')
-
 wx.$utils = {
   numPad (num, n) {
     let len = num.toString().length;
@@ -17,5 +16,6 @@ wx.$utils = {
       len++
     }
     return num;
-  }
+  },
+  ...require('./sha1')
 }

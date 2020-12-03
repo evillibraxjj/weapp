@@ -1,2 +1,6 @@
 @import "/style/flex.wxss";
 @import "/style/loading.wxss";
+
+page {
+  --red: #fb3a3a;
+}

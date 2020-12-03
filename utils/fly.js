@@ -11,12 +11,12 @@ const host = () => {
   }
   return 'https://api.loookauto.com'
 }
-
+const inOperationHttp = []
 const getRequestCache = (request) => {
-  const keyUrl = request.baseURL + request.url
+  const keyUrl = wx.$utils.sha1(request.baseURL + request.url)
   if (request.cache > 0 && cache.hasOwnProperty(keyUrl)) {
     const urlCache = cache[keyUrl]
-    const keyBody = JSON.stringify(request.body)
+    const keyBody = wx.$utils.sha1(JSON.stringify(request.body))
     if (urlCache.hasOwnProperty(keyBody)) {
       const bodyCache = urlCache[keyBody]
       const time = bodyCache.time
@@ -34,8 +34,8 @@ const getRequestCache = (request) => {
 
 const setRequestCache = (request, data) => {
   if (data && request.cache > 0) {
-    const keyUrl = `${request.baseURL}${request.url}`
-    const keyBody = `${JSON.stringify(request.body)}`
+    const keyUrl = wx.$utils.sha1(request.baseURL + request.url)
+    const keyBody = wx.$utils.sha1(`${JSON.stringify(request.body)}`)
     Object.assign(cache, {
       [keyUrl]: {
         ...cache[keyUrl],
@@ -56,7 +56,19 @@ fly.interceptors.request.use((request, promise) => {
     request.headers = {
       'X-Tag': 'flyio',
       'content-type': 'application/json',
-      'access_token': wx.getStorageSync('accessToken')
+      'access_token': token
+    }
+    const userInfo = wx.$store.data.storeUserInfo
+    request.body = {
+      //将会影响现实数据的参数作为放入body中区分缓存池
+      flyioKey: wx.$utils.sha1(`${JSON.stringify({
+        userId: userInfo?.customerId || 0,
+        identity: userInfo?.identity || 0,
+        isMembership: userInfo?.isMembership || 0,
+        parkId: wx.$store.data.storeUserPark?.parkId || wx.$store.data.storeDefaultPark?.parkId || 0,
+        carId: wx.$store.data.storeUserCar?.carId || 0
+      })}`),
+      ...request.body
     }
     return getRequestCache(request)
   }

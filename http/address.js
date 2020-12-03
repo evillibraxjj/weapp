@@ -1,5 +1,7 @@
 module.exports = {
   getDefaultPark: async data => {
-    wx.$store.data.storeDefaultPark = await wx.$fly.get('/addressService/park/getDefaultPark', data, { token: false })
+    const defaultPark = await wx.$fly.get('/addressService/park/getDefaultPark', data, { token: false })
+    wx.$store.data.storeDefaultPark = defaultPark
+    return defaultPark
   }
 }
