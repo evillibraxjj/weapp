@@ -1,6 +1,7 @@
 let code = null
 wx.$create({
   options: {
+    addGlobalClass: true,
     multipleSlots: true
   },
   properties: {
