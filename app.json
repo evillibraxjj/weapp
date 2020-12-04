@@ -16,9 +16,9 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-    "color": "#000",
+    "color": "#999999",
     "backgroundColor": "#fff",
-    "selectedColor": "#f00",
+    "selectedColor": "#000000",
     "borderStyle": "white",
     "list": [
       {
@@ -30,8 +30,8 @@
       {
         "pagePath": "pages/service/index",
         "text": "服务",
-        "iconPath": "static/tabs/order.png",
-        "selectedIconPath": "static/tabs/order-active.png"
+        "iconPath": "static/tabs/service.png",
+        "selectedIconPath": "static/tabs/service-active.png"
       },
       {
         "pagePath": "pages/order/index",

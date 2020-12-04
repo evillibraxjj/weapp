@@ -1,8 +1,27 @@
 <import src="/template/loading.wxml" />
 <template is="loading" wx:if="{{ pageLoading }}" />
-<my-page>
-  <view class="image-avatar" hover-class="none" hover-stop-propagation="false">
-    <image src="{{ storeUserInfo.avatarUrl }}" mode="widthFix" lazy-load />
+<my-page system-header-color="#0A0907" dark>
+  <view class="relative" hover-class="none" hover-stop-propagation="false">
+    <swiper class="swiper-banner" bindchange="bindChangeSwiper" autoplay circular>
+      <block wx:for="{{pageAdvertList}}" wx:key="advertId">
+        <swiper-item>
+          <image src="{{item.advertOss}}" mode="widthFix" lazy-load></image>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="swiper-indicator flex align-center">
+      <block wx:for="{{pageAdvertList}}" wx:key="advertId">
+        <view class="{{ pageAdvertIndex==index }}"></view>
+      </block>
+    </view>
+  </view>
+  <view class="page-grid">
+    <view class="service-gird flex align-stretch">
+      <view class="flex-sub"></view>
+      <view class="line"></view>
+      <view class="flex-sub"></view>
+    </view>
+    <view class="view-butler"></view>
   </view>
   <view class="flex justify-between" hover-class="none" hover-stop-propagation="false" style="margin:30rpx;">
     <text>{{ storeUserInfo.nickName }}</text>
@@ -10,8 +29,5 @@
   </view>
   <view wx:if="{{pageOrderPrompt}}">
     <block wx:for="{{pageOrderPrompt}}" wx:key="index"></block>
-  </view>
-  <view class="" hover-class="none" hover-stop-propagation="false" style="height:100vh;">
-    <view class="" hover-class="none" hover-stop-propagation="false" bind:tap="bindClick">登出</view>
   </view>
 </my-page>

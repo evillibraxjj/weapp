@@ -1,6 +1,13 @@
 @import "/style/flex.wxss";
 @import "/style/loading.wxss";
 
+view {
+  box-sizing: border-box;
+}
+
 page {
+  --page-back: #f9f9f9;
   --red: #fb3a3a;
+
+  background: var(--page-back);
 }

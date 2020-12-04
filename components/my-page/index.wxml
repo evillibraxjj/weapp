@@ -1,8 +1,9 @@
-<block wx:if="{{ storeAppLoad }}">
-  <view class="page">
-    <slot />
+<block wx:if="{{ storeAppLoad && pageMenuInfo }}">
+  <view wx:if="{{ systemHeaderColor }}" style="height:{{ pageMenuInfo.top }}px;">
+    <view class="system-header" style="height:{{ pageMenuInfo.top }}px;background:{{ systemHeaderColor }};"></view>
   </view>
-  <view wx:if="{{ !storeToken }}" class="login {{ loginShowModel }}" catch:tap="bindChenaLogin" catch:touchmove>
+  <slot />
+  <view wx:if="{{ !storeToken }}" class="login {{ loginShowModel }}" catch:tap="bindChenaLogin" catch:touchmove="{{ loginShowModel || null }}">
     <view class="flex flex-column justify-end" catch:tap>
       <button loading="{{loginLoading}}" hover-class="button-hover" open-type="getUserInfo" bind:getuserinfo="bindLogin">
         <text>登录</text>

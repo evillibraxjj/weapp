@@ -19,10 +19,12 @@ App({
   async onLaunch () {
     const data = await wx.$fly.all([wx.$http.system.getHolidayInfo(), wx.$http.address.getDefaultPark(), wx.$http.user.getUserInfo()])
     const appLoad = data[1] || false
-    wx.$store.data.storeAppLoad = appLoad
+    wx.$store.data.storeAppLoad = !!appLoad
     wx.$store.update()
-    appLoad && loadFontFace('TXXCHJ.ttf')
-    appLoad && loadFontFace('Oswald-Bold.otf')
     appLoad && wx.$event.emit('appLoad') //全局广播小程序初始化完成
+    wx.nextTick(() => {
+      appLoad && loadFontFace('TXXCHJ.ttf')
+      appLoad && loadFontFace('Oswald-Bold.otf')
+    })
   }
 })

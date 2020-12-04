@@ -1,13 +1,13 @@
 
 import { appLoad, userLogout } from './loadData'
-
-wx.$create(wx.$store, {
+import create from '../../store/create'
+create(wx.$store, {
   data: {
-    pageLoading: null,
     storeUserInfo: null,
-    storeDefaultPark: null,
+    pageLoading: null,
     pageOrderPrompt: null,
-    pageAdvertList: null
+    pageAdvertList: null,
+    pageAdvertIndex: 0
   },
   onLoad () {
     this.setData({ pageLoading: new Date().getTime() })
@@ -18,7 +18,10 @@ wx.$create(wx.$store, {
     wx.$event.on('userLogin', this, () => appLoad(this))
     wx.$event.on('userLogout', this, async () => userLogout(this))
   },
-  bindClick () {
+  bindChangeSwiper (e) {
+    this.setData({ pageAdvertIndex: e.detail.current })
+  },
+  bindTapLogout () {
     wx.$store.logout()
-  }
+  },
 })

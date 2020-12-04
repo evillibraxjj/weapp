@@ -6,11 +6,11 @@
   flex-flow: column;
 }
 
-.felx-wrap {
+.flex-wrap {
   flex-wrap: wrap;
 }
 
-.felx-sub {
+.flex-sub {
   flex: 1;
 }
 
@@ -53,4 +53,16 @@
 
 .justify-around {
   justify-content: space-around;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
 }

@@ -1,15 +1,53 @@
-.image-avatar {
-  position: relative;
-  overflow: hidden;
+.swiper-banner,
+.swiper-banner image {
+  width: 100vw;
+  height: 618rpx;
 }
 
-.image-avatar image {
-  width: 100%;
-}
-
-.image-avatar canvas {
+.swiper-indicator {
   position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+  left: 36rpx;
+  bottom: 68rpx;
+  display: flex;
+}
+
+.swiper-indicator view {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
+  background: white;
+}
+
+.swiper-indicator view.true {
+  width: 20rpx;
+  height: 20rpx;
+  background: #FF3B3B;
+}
+
+.page-grid {
+  position: relative;
+  top: -38rpx;
+  margin: 0 36rpx;
+}
+
+.service-gird {
+  height: 364rpx;
+  background: white;
+  box-shadow: 0 4rpx 18rpx 0 rgba(224, 224, 224, 0.5);
+  border-radius: 20rpx;
+  padding: 60rpx;
+}
+
+.service-gird .line {
+  width: 2rpx;
+  background: #f3f3f3;
+}
+
+.view-butler {
+  margin-top: 32rpx;
+  padding: 22rpx 0 16rpx 0;
+  height: 133rpx;
+  background: url('https://lookprd-oss.oss-cn-shenzhen.aliyuncs.com/fitres/image/2020.png');
+  background-size: 100%;
 }

@@ -25,7 +25,7 @@ const getRequestCache = (request) => {
       if (new Date() < curTime) return bodyCache.data
       else {
         delete urlCache[keyBody]
-        if (Object.keys(cache[keyUrl]).length == 0) delete cache[keyUrl]
+        Object.keys(cache[keyUrl]).length == 0 && delete cache[keyUrl]
       }
     }
   }
@@ -80,9 +80,9 @@ fly.interceptors.response.use(
     switch (status) {
       case 200:
         const { code, data, message } = response.data
+        message && wx.$showToast(message)
         switch (parseInt(code)) {
           case 200:
-            if (message) wx.$showToast(message)
             setRequestCache(request, data)
             return data || code
           case 401:

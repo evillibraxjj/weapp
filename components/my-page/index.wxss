@@ -1,9 +1,14 @@
 @import "/style/flex.wxss";
 
-.page {
+.system-header {
+  position: fixed;
+  top: 0;
   width: 100vw;
-  height: 100vh;
-  background: white;
+  z-index: 2;
+}
+
+slot {
+  z-index: 1;
 }
 
 .login {
