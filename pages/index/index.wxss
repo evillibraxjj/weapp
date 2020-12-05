@@ -29,6 +29,9 @@
   position: relative;
   top: -38rpx;
   margin: 0 36rpx;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 30rpx;
 }
 
 .service-gird {
@@ -37,6 +40,7 @@
   box-shadow: 0 4rpx 18rpx 0 rgba(224, 224, 224, 0.5);
   border-radius: 20rpx;
   padding: 60rpx;
+  align-items: flex-start;
 }
 
 .service-gird .line {
@@ -44,10 +48,41 @@
   background: #f3f3f3;
 }
 
-.view-butler {
-  margin-top: 32rpx;
+.swiper-butler {
   padding: 22rpx 0 16rpx 0;
+  position: relative;
   height: 133rpx;
   background: url('https://lookprd-oss.oss-cn-shenzhen.aliyuncs.com/fitres/image/2020.png');
   background-size: 100%;
+}
+
+.swiper-butler navigator {
+  padding: 0 168rpx 0 196rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: white;
+  line-height: 36rpx;
+}
+
+.swiper-butler .tip {
+  height: 60rpx;
+  margin-top: 8rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+  color: #bcbfcb;
+  line-height: 28rpx;
+}
+
+.user-name {
+  position: fixed;
+  left: 36rpx;
+  height: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+  color: white;
+  line-height: 40rpx;
+}
+
+.link-color {
+  color: #6fc2ff;
 }

@@ -1,7 +1,7 @@
 <import src="/template/loading.wxml" />
 <template is="loading" wx:if="{{ pageLoading }}" />
 <my-page system-header-color="#0A0907" dark>
-  <view class="relative" hover-class="none" hover-stop-propagation="false">
+  <view class="relative" style="top:{{ scrollTop }}rpx;">
     <swiper class="swiper-banner" bindchange="bindChangeSwiper" autoplay circular>
       <block wx:for="{{pageAdvertList}}" wx:key="advertId">
         <swiper-item>
@@ -9,11 +9,18 @@
         </swiper-item>
       </block>
     </swiper>
-    <view class="swiper-indicator flex align-center">
-      <block wx:for="{{pageAdvertList}}" wx:key="advertId">
-        <view class="{{ pageAdvertIndex==index }}"></view>
-      </block>
-    </view>
+    <block wx:if="{{pageAdvertList.length>1}}">
+      <view class="swiper-indicator flex align-center">
+        <block wx:for="{{pageAdvertList}}" wx:key="advertId">
+          <view class="{{ pageAdvertIndex==index }}"></view>
+        </block>
+      </view>
+    </block>
+    <block wx:if="{{storeUserInfo}}">
+      <view class="user-name" style="top:{{ pageMenuInfo.top }}px;">
+        <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
+      </view>
+    </block>
   </view>
   <view class="page-grid">
     <view class="service-gird flex align-stretch">
@@ -21,11 +28,54 @@
       <view class="line"></view>
       <view class="flex-sub"></view>
     </view>
-    <view class="view-butler"></view>
-  </view>
-  <view class="flex justify-between" hover-class="none" hover-stop-propagation="false" style="margin:30rpx;">
-    <text>{{ storeUserInfo.nickName }}</text>
-    <text>{{ storeDefaultPark.deviceLocation }}</text>
+    <view class="swiper-butler">
+      <block wx:if="{{storeUserInfo && pageOrderPrompt.length>0}}">
+        <navigator hover-class="none">
+          <text>【{{storeUserInfo.userName||storeUserInfo.nickName}}】您好，</text>
+          <swiper class="tip" bindchange="bindChangeOrder" autoplay circular vertical>
+            <block wx:for="{{pageOrderPrompt}}" wx:key="orderNo">
+              <swiper-item class="{{ index == pageOrderIndex}}">
+                <block wx:if="{{item.orderStatus==2}}">
+                  <text>我们即将在{{item.orderTime}}为您的爱车：{{item.carNumber}}进行‘</text>
+                  <text class="link-color">{{item.serviceName}}</text>
+                  <text>’服务。</text>
+                </block>
+                <block wx:else>
+                  <text>您的爱车：{{item.carNumber}}正在进行‘</text>
+                  <text class="link-color">{{item.serviceName}}</text>
+                  <text>’服务，可查看服务详细流程。</text>
+                </block>
+              </swiper-item>
+            </block>
+          </swiper>
+        </navigator>
+      </block>
+      <block wx:elif="{{storeUserInfo && pageOrderPrompt.length==0}}">
+        <navigator hover-class="none">
+          <text>【{{storeUserInfo.userName||storeUserInfo.nickName}}】您好，</text>
+          <swiper class="tip" autoplay circular vertical>
+            <swiper-item>
+              <text>有计划的对爱车进行清洁保养，能延长使用寿命哦！</text>
+            </swiper-item>
+            <swiper-item>
+              <text>超级路氪为您的爱车提供最专业的服务，赶快去预约吧！</text>
+            </swiper-item>
+          </swiper>
+        </navigator>
+      </block>
+      <block wx:else>
+        <navigator hover-class="none">
+          <text>您好，</text>
+          <swiper class="tip">
+            <swiper-item>
+              <text>小管家有重要事情要向您回汇报，请先登录哦。</text>
+              <text>立即登录>></text>
+            </swiper-item>
+          </swiper>
+        </navigator>
+      </block>
+    </view>
+    <view class="" style="height:100vh;"></view>
   </view>
   <view wx:if="{{pageOrderPrompt}}">
     <block wx:for="{{pageOrderPrompt}}" wx:key="index"></block>

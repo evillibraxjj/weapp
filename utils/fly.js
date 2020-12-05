@@ -5,6 +5,7 @@ const host = () => {
     switch (__wxConfig.envVersion) {
       case 'develop':
         return 'https://api.dev3.loookauto.com'
+        // return 'https://api.test.loookauto.com'
       case 'trial':
         return 'https://api.test.loookauto.com'
     }

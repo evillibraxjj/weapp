@@ -1,7 +1,9 @@
 @import "/style/flex.wxss";
 @import "/style/loading.wxss";
 
-view {
+view,
+swiper,
+navigator {
   box-sizing: border-box;
 }
 
