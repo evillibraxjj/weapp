@@ -1,6 +1,17 @@
 <import src="/template/loading.wxml" />
 <template is="loading" wx:if="{{ loading }}" />
 <my-page>
-  <view class="">{{ storeUserPark.parkName || storeDefaultPark.parkName }}</view>
-  <view class="">{{ storeUserCar.carNumber }}</view>
+  <view class="sticky-top">
+    <view class="park-info flex">
+      <view class="flex-sub" hover-class="none" hover-stop-propagation="false">
+        <text class="arrow stars">{{ storeUserPark.parkName || storeDefaultPark.parkName }}</text>
+      </view>
+      <view class="switch flex align-stretch">
+        <text>车位</text>
+        <text class="flex-sub">到店</text>
+      </view>
+    </view>
+    <view class="">{{ storeUserCar.carNumber }}</view>
+  </view>
+  <view class="" style="height:300vh"></view>
 </my-page>

@@ -1,5 +1,5 @@
-<import src="index.skeleton.wxml" />
-<template is="skeleton" wx:if="{{pageLoading}}" />
+<import src="/template/loading.wxml" />
+<template is="loading" wx:if="{{ pageLoading }}" />
 <my-page system-header-color="#0a0907" dark wx:else>
   <view class="relative" style="top:{{ scrollTop }}rpx;">
     <view class="swiper-bg" style="top:{{ pageMenuInfo.top }}px;">

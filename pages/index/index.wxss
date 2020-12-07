@@ -1,5 +1,3 @@
-@import "./index.skeleton.wxss";
-
 .swiper-banner,
 .swiper-banner image {
   width: 100vw;
