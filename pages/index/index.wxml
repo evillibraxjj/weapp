@@ -23,7 +23,7 @@
       <view class="user-name" style="top:{{ pageMenuInfo.top }}px;">
         <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
       </view>
-    </block>  
+    </block>
   </view>
   <view class="page-grid">
     <view class="service-gird">
