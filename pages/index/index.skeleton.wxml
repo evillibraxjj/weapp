@@ -1,42 +1,85 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/12/7 下午3:38:46 
+使用方法：
+在 D:\wx\fit.2.0\pages\index\index.wxml 引入模板
+
+```
+<import src="index.skeleton.wxml"/>
+<template is="skeleton" wx-if="{{loading}}" />
+```
+
+在 D:\wx\fit.2.0\pages\index\index.wxss 中引入样式
+```
+@import "./index.skeleton.wxss";
+```
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
 <template name="skeleton">
   <view class="sk-container">
     <view is="components/my-page/index">
       <view style="height:48px;">
-        <view class="system-header page-index--system-header" style="height:48px;background:#0A0907;"></view>
+        <view class="system-header page-index--system-header" style="height:48px;background:#0a0907;"></view>
       </view>
       <view class="relative" style="top:0px;">
-        <swiper autoplay="false" circular="true" class="swiper-banner" current="0">
+        <view class="swiper-bg" style="top:48px;">
+          <text class="sk-transparent sk-text-14-2857-401 sk-text">你好，许佳俊</text>
+        </view>
+        <swiper autoplay="false" circular="true" class="swiper-banner sk-pseudo sk-pseudo-circle" current="0">
           <swiper-item style="position: absolute; width: 100%; height: 100%; transform: translate(0%, 0px) translateZ(0px);">
             <image lazy-load="true" mode="widthFix" style="height: 341.136px;" class="sk-image"></image>
           </swiper-item>
         </swiper>
+        <view class="swiper-indicator flex align-center">
+          <view class="false"></view>
+          <view class="true"></view>
+        </view>
+        <view class="user-name" style="top:48px;">
+          <text class="sk-transparent sk-text-15-9091-147 sk-text">你好，许佳俊</text>
+        </view>
       </view>
       <view class="page-grid">
         <view class="service-gird">
           <view>
             <image class="sk-image"></image>
-            <text class="title sk-transparent sk-text-10-4167-573 sk-text" style="background-position-x: 50%;">
-              动态服务
-            </text>
-            <text class="subtitle sk-transparent sk-text-14-7059-299 sk-text" style="background-position-x: 50%;">
-              全方位托管动态服务
-            </text>
+            <text class="title sk-transparent sk-text-10-4167-672 sk-text" style="background-position-x: 50%;">动态服务</text>
+            <text class="subtitle sk-transparent sk-text-14-7059-342 sk-text" style="background-position-x: 50%;">全方位托管动态服务</text>
           </view>
           <view class="line"></view>
           <view>
             <image class="sk-image"></image>
-            <text class="title sk-transparent sk-text-10-4167-493 sk-text" style="background-position-x: 50%;">
-              预约服务
-            </text>
-            <text class="subtitle sk-transparent sk-text-14-7059-418 sk-text" style="background-position-x: 50%;">
-              马上下单预约服务
-            </text>
+            <text class="title sk-transparent sk-text-10-4167-566 sk-text" style="background-position-x: 50%;">预约服务</text>
+            <text class="subtitle sk-transparent sk-text-14-7059-664 sk-text" style="background-position-x: 50%;">马上下单预约服务</text>
           </view>
         </view>
-        <view class="swiper-butler sk-image"></view>
+        <view class="swiper-butler sk-image">
+          <navigator hover-class="none">
+            <text class="sk-transparent sk-text-13-1579-800 sk-text">【许佳俊】您好，</text>
+            <swiper autoplay="false" circular="true" vertical="true" class="tip" current="0">
+              <swiper-item class="false" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 0%) translateZ(0px);">
+                <text class="sk-transparent sk-text-13-3333-783 sk-text">您的爱车：渝C33333正在进行‘</text>
+                <text class="link-color sk-transparent sk-text-13-3333-622 sk-text">轮胎保养！</text>
+                <text class="sk-transparent sk-text-13-3333-631 sk-text">’服务，可查看服务详细流程。</text>
+              </swiper-item>
+              <swiper-item class="true" style="position: absolute; width: 100%; height: 100%; transform: translate(0px, 100%) translateZ(0px);">
+                <text class="sk-transparent sk-text-13-3333-179 sk-text">我们即将在2020-12-08 08:00为您的爱车：渝A68555进行‘</text>
+                <text class="link-color sk-transparent sk-text-13-3333-418 sk-text">ALPHA全能美护套餐</text>
+                <text class="sk-transparent sk-text-13-3333-928 sk-text">’服务。</text>
+              </swiper-item>
+            </swiper>
+          </navigator>
+        </view>
         <view class="star-grid">
-          <view></view>
-          <view></view>
+          <view>
+            <image class="sk-image"></image>
+            <text class="title sk-transparent sk-text-22-2222-448 sk-text">路氪星球</text>
+            <text class="subtitle sk-transparent sk-text-13-3333-78 sk-text">最新最酷零配件、装备、商品</text>
+          </view>
+          <view>
+            <image class="sk-image"></image>
+            <text class="title sk-transparent sk-text-22-2222-389 sk-text">我的星球</text>
+            <text class="subtitle sk-transparent sk-text-13-3333-360 sk-text">租赁出租、抵押、置换、贷款</text>
+          </view>
         </view>
         <navigator class="navigator-vip sk-image" hover-class="none"></navigator>
       </view>
