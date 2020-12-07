@@ -1,7 +1,10 @@
-<import src="/template/loading.wxml" />
-<template is="loading" wx:if="{{ pageLoading }}" />
-<my-page system-header-color="#0A0907" dark>
+<import src="index.skeleton.wxml" />
+<template is="skeleton" wx:if="{{pageLoading}}" />
+<my-page system-header-color="#0a0907" dark wx:else>
   <view class="relative" style="top:{{ scrollTop }}rpx;">
+    <view class="swiper-bg" style="top:{{ pageMenuInfo.top }}px;">
+      <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
+    </view>
     <swiper class="swiper-banner" bindchange="bindChangeSwiper" autoplay circular>
       <block wx:for="{{pageAdvertList}}" wx:key="advertId">
         <swiper-item>
@@ -20,13 +23,21 @@
       <view class="user-name" style="top:{{ pageMenuInfo.top }}px;">
         <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
       </view>
-    </block>
+    </block>  
   </view>
   <view class="page-grid">
-    <view class="service-gird flex align-stretch">
-      <view class="flex-sub"></view>
+    <view class="service-gird">
+      <view>
+        <image />
+        <text class="title">动态服务</text>
+        <text class="subtitle">全方位托管动态服务</text>
+      </view>
       <view class="line"></view>
-      <view class="flex-sub"></view>
+      <view>
+        <image />
+        <text class="title">预约服务</text>
+        <text class="subtitle">马上下单预约服务</text>
+      </view>
     </view>
     <view class="swiper-butler">
       <block wx:if="{{storeUserInfo && pageOrderPrompt.length>0}}">
@@ -75,7 +86,24 @@
         </navigator>
       </block>
     </view>
-    <view class="" style="height:100vh;"></view>
+    <view class="star-grid">
+      <view>
+        <image />
+        <text class="title">路氪星球</text>
+        <text class="subtitle">最新最酷零配件、装备、商品</text>
+      </view>
+      <view>
+        <image />
+        <text class="title">我的星球</text>
+        <text class="subtitle">租赁出租、抵押、置换、贷款</text>
+      </view>
+    </view>
+    <navigator class="navigator-vip" hover-class="none">
+      <text>骇客中心</text>
+      <view>
+        <text>积分可兑换优惠券及周边礼包 ></text>
+      </view>
+    </navigator>
   </view>
   <view wx:if="{{pageOrderPrompt}}">
     <block wx:for="{{pageOrderPrompt}}" wx:key="index"></block>

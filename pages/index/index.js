@@ -5,14 +5,11 @@ create(wx.$store, {
   data: {
     scrollTop: 0,
     storeUserInfo: null,
-    pageLoading: null,
+    pageLoading: new Date().getTime(),
     pageOrderPrompt: null,
     pageOrderIndex: 0,
     pageAdvertList: null,
     pageAdvertIndex: 0
-  },
-  onLoad () {
-    this.setData({ pageLoading: new Date().getTime() })
   },
   onReady () {
     this.setData({ pageMenuInfo: wx.$menu })
