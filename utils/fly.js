@@ -13,7 +13,6 @@ const host = () => {
 }
 const getRequestCache = (request) => {
   if (request.cache > 0 && cacheDB.hasOwnProperty(request.flyioKey)) {
-    console.info(cacheDB)
     const cache = cacheDB[request.flyioKey] || {}, keyUrl = wx.$utils.sha1(request.baseURL + request.url)
     if (cache.hasOwnProperty(keyUrl)) {
       const urlCache = cache[keyUrl], keyBody = wx.$utils.sha1(JSON.stringify(request.body))
@@ -30,7 +29,7 @@ const getRequestCache = (request) => {
 
 const setRequestCache = (request, data) => {
   if (data && request.cache > 0) {
-    const cache = cacheDB[request.flyioKey] || {}, keyUrl = wx.$utils.sha1(request.baseURL + request.url), keyBody = wx.$utils.sha1(`${JSON.stringify(request.body)}`)
+    const cache = cacheDB[request.flyioKey] || {}, keyUrl = wx.$utils.sha1(request.baseURL + request.url), keyBody = wx.$utils.sha1(JSON.stringify(request.body))
     Object.assign(cache, { [keyUrl]: { ...cache[keyUrl], [keyBody]: { time: new Date(), data } } })
     cacheDB[request.flyioKey] = cache
   }
@@ -38,26 +37,19 @@ const setRequestCache = (request, data) => {
 
 fly.interceptors.request.use((request, promise) => {
   const token = wx.getStorageSync('accessToken')
-  if (request.token != false && !token) {
-    return promise.resolve(null)
-  } else {
-    request.headers = {
-      'X-Tag': 'flyio',
-      'content-type': 'application/json',
-      'access_token': token
-    }
-    const userInfo = wx.$store.data.storeUserInfo
-    //将会影响现实数据的参数作为放入body中区分缓存池
-    const KeyData = {
-      userId: userInfo?.customerId || 0,
-      identity: userInfo?.identity || 0,
-      isMembership: userInfo?.isMembership || 0,
-      parkId: wx.$store.data.storeUserPark?.parkId || wx.$store.data.storeDefaultPark?.parkId || 0,
-      carId: wx.$store.data.storeUserCar?.carId || 0
-    }
-    request.flyioKey = wx.$utils.sha1(JSON.stringify(KeyData))
-    return getRequestCache(request)
+  if (request.token != false && !token) return promise.resolve(null)
+  request.headers = { 'X-Tag': 'flyio', 'content-type': 'application/json', 'access_token': token }
+  const userInfo = wx.$store.data.storeUserInfo
+  //将会影响数据的参数区分缓存池
+  const KeyData = {
+    userId: userInfo?.customerId || 0,
+    identity: userInfo?.identity || 0,
+    isMembership: userInfo?.isMembership || 0,
+    parkId: wx.$store.data.storeUserPark?.parkId || wx.$store.data.storeDefaultPark?.parkId || 0,
+    carId: wx.$store.data.storeUserCar?.carId || 0
   }
+  request.flyioKey = wx.$utils.sha1(JSON.stringify(KeyData))
+  return getRequestCache(request)
 })
 
 fly.interceptors.response.use(
