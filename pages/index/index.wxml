@@ -1,111 +1,14 @@
 <import src="/template/loading.wxml" />
 <template is="loading" wx:if="{{ pageLoading }}" />
 <my-page system-header-color="#0a0907" dark wx:else>
-  <view class="relative" style="top:{{ scrollTop }}rpx;">
-    <view class="swiper-bg" style="top:{{ pageMenuInfo.top }}px;">
-      <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
-    </view>
-    <swiper class="swiper-banner" bindchange="bindChangeSwiper" autoplay circular>
-      <block wx:for="{{pageAdvertList}}" wx:key="advertId">
-        <swiper-item>
-          <image src="{{item.advertOss}}" mode="widthFix" lazy-load></image>
-        </swiper-item>
-      </block>
+  <view class="page flex flex-column">
+    <swiper class="flex-sub">
+      <swiper-item>
+        <scroll-view scroll-y>
+          <page-index />
+        </scroll-view>
+      </swiper-item>
     </swiper>
-    <block wx:if="{{pageAdvertList.length>1}}">
-      <view class="swiper-indicator flex align-center">
-        <block wx:for="{{pageAdvertList}}" wx:key="advertId">
-          <view class="{{ pageAdvertIndex==index }}"></view>
-        </block>
-      </view>
-    </block>
-    <block wx:if="{{storeUserInfo}}">
-      <view class="user-name" style="top:{{ pageMenuInfo.top }}px;">
-        <text>你好，{{ storeUserInfo.userName || storeUserInfo.nickName  }}</text>
-      </view>
-    </block>
-  </view>
-  <view class="page-grid">
-    <view class="service-gird">
-      <view>
-        <image />
-        <text class="title">动态服务</text>
-        <text class="subtitle">全方位托管动态服务</text>
-      </view>
-      <view class="line"></view>
-      <view>
-        <image />
-        <text class="title">预约服务</text>
-        <text class="subtitle">马上下单预约服务</text>
-      </view>
-    </view>
-    <view class="swiper-butler">
-      <block wx:if="{{storeUserInfo && pageOrderPrompt.length>0}}">
-        <navigator hover-class="none">
-          <text>【{{storeUserInfo.userName||storeUserInfo.nickName}}】您好，</text>
-          <swiper class="tip" bindchange="bindChangeOrder" autoplay circular vertical>
-            <block wx:for="{{pageOrderPrompt}}" wx:key="orderNo">
-              <swiper-item class="{{ index == pageOrderIndex}}">
-                <block wx:if="{{item.orderStatus==2}}">
-                  <text>我们即将在{{item.orderTime}}为您的爱车：{{item.carNumber}}进行‘</text>
-                  <text class="link-color">{{item.serviceName}}</text>
-                  <text>’服务。</text>
-                </block>
-                <block wx:else>
-                  <text>您的爱车：{{item.carNumber}}正在进行‘</text>
-                  <text class="link-color">{{item.serviceName}}</text>
-                  <text>’服务，可查看服务详细流程。</text>
-                </block>
-              </swiper-item>
-            </block>
-          </swiper>
-        </navigator>
-      </block>
-      <block wx:elif="{{storeUserInfo && pageOrderPrompt.length==0}}">
-        <navigator hover-class="none">
-          <text>【{{storeUserInfo.userName||storeUserInfo.nickName}}】您好，</text>
-          <swiper class="tip" autoplay circular vertical>
-            <swiper-item>
-              <text>有计划的对爱车进行清洁保养，能延长使用寿命哦！</text>
-            </swiper-item>
-            <swiper-item>
-              <text>超级路氪为您的爱车提供最专业的服务，赶快去预约吧！</text>
-            </swiper-item>
-          </swiper>
-        </navigator>
-      </block>
-      <block wx:else>
-        <navigator hover-class="none">
-          <text>您好，</text>
-          <swiper class="tip">
-            <swiper-item>
-              <text>小管家有重要事情要向您回汇报，请先登录哦。</text>
-              <text>立即登录>></text>
-            </swiper-item>
-          </swiper>
-        </navigator>
-      </block>
-    </view>
-    <view class="star-grid">
-      <view>
-        <image />
-        <text class="title">路氪星球</text>
-        <text class="subtitle">最新最酷零配件、装备、商品</text>
-      </view>
-      <view>
-        <image />
-        <text class="title">我的星球</text>
-        <text class="subtitle">租赁出租、抵押、置换、贷款</text>
-      </view>
-    </view>
-    <navigator class="navigator-vip" hover-class="none">
-      <text>骇客中心</text>
-      <view>
-        <text>积分可兑换优惠券及周边礼包 ></text>
-      </view>
-    </navigator>
-  </view>
-  <view wx:if="{{pageOrderPrompt}}">
-    <block wx:for="{{pageOrderPrompt}}" wx:key="index"></block>
+    <view class="tab"></view>
   </view>
 </my-page>

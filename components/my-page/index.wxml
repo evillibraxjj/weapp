@@ -2,7 +2,9 @@
   <view wx:if="{{ systemHeaderColor }}" style="height:{{ pageMenuInfo.top }}px;">
     <view class="system-header" style="height:{{ pageMenuInfo.top }}px;background:{{ systemHeaderColor }};"></view>
   </view>
-  <slot />
+  <view style="height:calc(100vh - {{ pageMenuInfo.top }}px)">
+    <slot />
+  </view>
   <view wx:if="{{ !storeToken }}" class="login {{ loginShowModel }}" catch:tap="bindChenaLogin" catch:touchmove="{{ loginShowModel || null }}">
     <view class="flex flex-column justify-end" catch:tap>
       <button class="button" loading="{{loginLoading}}" open-type="getUserInfo" bind:getuserinfo="bindLogin">

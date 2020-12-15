@@ -12,7 +12,7 @@ wx.$create({
     systemHeaderColor:
     {
       type: String,
-      value: null
+      value: '#ffffff'
     }
   },
   data: {
