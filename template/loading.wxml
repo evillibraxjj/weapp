@@ -1,9 +1,5 @@
 <template name="loading">
   <view class="loading" catch:touchmove catch:tap>
-    <view></view>
-    <view></view>
-    <view></view>
-    <view></view>
-    <view></view>
+    <image src="/static/loading.gif" mode="widthFix" />
   </view>
 </template>

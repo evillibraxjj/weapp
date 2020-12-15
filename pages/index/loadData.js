@@ -13,7 +13,7 @@ exports.appLoad = async (self) => {
     },
     () => wx.nextTick(() => {
       const loading = self.data.pageLoading
-      setTimeout(() => self.setData({ pageLoading: null }), 1000 - (new Date().getTime()) + loading)
+      setTimeout(() => self.setData({ pageLoading: null }), 2000 - (new Date().getTime()) + loading)
     })
   )
 }
