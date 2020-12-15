@@ -1,8 +1,0 @@
-<import src="/template/loading.wxml" />
-<template is="loading" wx:if="{{ loading }}" />
-<my-page>
-  <view class="flex justify-between" hover-class="none" hover-stop-propagation="false" style="margin:30rpx;">
-    <text>{{ storeUserInfo.nickName }}</text>
-    <text>{{ storeDefaultPark.deviceLocation }}</text>
-  </view>
-</my-page>
