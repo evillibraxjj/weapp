@@ -1,13 +1,8 @@
 <import src="/template/loading.wxml" />
 <template is="loading" wx:if="{{ loading }}" />
 <my-page>
-  <view class="image-avatar" hover-class="none" hover-stop-propagation="false">
-    <canvas canvas-id="myCanvas" />
-    <image src="{{ storeUserInfo.avatarUrl }}" mode="widthFix" lazy-load />
-  </view>
   <view class="flex justify-between" hover-class="none" hover-stop-propagation="false" style="margin:30rpx;">
     <text>{{ storeUserInfo.nickName }}</text>
     <text>{{ storeDefaultPark.deviceLocation }}</text>
   </view>
-  <view class="" hover-class="none" hover-stop-propagation="false" style="height:100vh;"></view>
 </my-page>
