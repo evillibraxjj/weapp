@@ -11,26 +11,26 @@ create(wx.$store, {
     pageAdvertList: null,
     pageAdvertIndex: 0
   },
-  onReady () {
+  onReady() {
     this.setData({ pageMenuInfo: wx.$menu })
     wx.$store.data.storeAppLoad && appLoad(this)
     wx.$event.on('appLoad', this, () => appLoad(this))
     wx.$event.on('userLogin', this, () => appLoad(this))
     wx.$event.on('userLogout', this, async () => userLogout(this))
   },
-  onPageScroll (e) {
+  onPageScroll(e) {
     this.setData(e)
   },
-  bindChangeSwiper (e) {
+  bindChangeSwiper(e) {
     this.setData({ pageAdvertIndex: e.detail.current })
   },
-  bindChangeOrder (e) {
+  bindChangeOrder(e) {
     this.setData({ pageOrderIndex: e.detail.current })
   },
-  bindTapLogout () {
+  bindTapLogout() {
     wx.$store.logout()
   },
-  bindTapButler (e) {
+  bindTapButler(e) {
     console.info(e.currentTarget.dataset)
   }
 })
