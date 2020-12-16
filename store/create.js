@@ -8,7 +8,7 @@ const ARRAYTYPE = '[object Array]'
 const OBJECTTYPE = '[object Object]'
 const FUNCTIONTYPE = '[object Function]'
 
-export default function create (store, option) {
+export default function create(store, option) {
   let updatePath = null
   if (arguments.length === 2) {
     if (option.data && Object.keys(option.data).length > 0) {
@@ -61,7 +61,7 @@ export default function create (store, option) {
         this._updatePath = componentUpdatePath
         syncValues(this.store.data, store.data)
         walk(store.data || {})
-        this.setData.call(this, this.store.data)
+        this.setData.call(this, store.data)
         rewriteUpdate(this)
         this.store.instances[this.page.route].push(this)
       }
@@ -71,7 +71,7 @@ export default function create (store, option) {
   }
 }
 
-function syncValues (from, to) {
+function syncValues(from, to) {
   Object.keys(to).forEach(key => {
     if (from.hasOwnProperty(key)) {
       to[key] = from[key]
@@ -79,13 +79,13 @@ function syncValues (from, to) {
   })
 }
 
-function getUpdatePath (data) {
+function getUpdatePath(data) {
   const result = {}
   dataToPath(data, result)
   return result
 }
 
-function dataToPath (data, result) {
+function dataToPath(data, result) {
   Object.keys(data).forEach(key => {
     result[key] = true
     const type = Object.prototype.toString.call(data[key])
@@ -97,7 +97,7 @@ function dataToPath (data, result) {
   })
 }
 
-function _objToPath (data, path, result) {
+function _objToPath(data, path, result) {
   Object.keys(data).forEach(key => {
     result[path + '.' + key] = true
     delete result[path]
@@ -110,7 +110,7 @@ function _objToPath (data, path, result) {
   })
 }
 
-function _arrayToPath (data, path, result) {
+function _arrayToPath(data, path, result) {
   data.forEach((item, index) => {
     result[path + '[' + index + ']'] = true
     delete result[path]
@@ -123,7 +123,7 @@ function _arrayToPath (data, path, result) {
   })
 }
 
-function rewritePureUpdate (ctx) {
+function rewritePureUpdate(ctx) {
   ctx.update = function (patch) {
     const store = this.store
     const that = this
@@ -151,20 +151,20 @@ function rewritePureUpdate (ctx) {
   }
 }
 
-function initCloud (env) {
+function initCloud(env) {
   wx.cloud.init()
   globalStore.db = wx.cloud.database({
     env: env
   })
 }
 
-function push (patch) {
+function push(patch) {
   return new Promise(function (resolve, reject) {
     _push(update(patch), resolve, reject)
   })
 }
 
-function _push (diffResult, resolve) {
+function _push(diffResult, resolve) {
   const objs = diffToPushObj(diffResult)
   Object.keys(objs).forEach((path) => {
     const arr = path.split('-')
@@ -185,7 +185,7 @@ function _push (diffResult, resolve) {
   })
 }
 
-function update (patch) {
+function update(patch) {
   return new Promise(resolve => {
     //defineFnProp(globalStore.data)
     if (patch) {
@@ -229,7 +229,7 @@ function update (patch) {
   })
 }
 
-function matchGlobalData (diffResult) {
+function matchGlobalData(diffResult) {
   if (!globalStore.globalData) return false
   for (let keyA in diffResult) {
     if (globalStore.globalData.indexOf(keyA) > -1) {
@@ -244,7 +244,7 @@ function matchGlobalData (diffResult) {
   return false
 }
 
-function needUpdate (diffResult, updatePath) {
+function needUpdate(diffResult, updatePath) {
   for (let keyA in diffResult) {
     if (updatePath[keyA]) {
       return true
@@ -258,7 +258,7 @@ function needUpdate (diffResult, updatePath) {
   return false
 }
 
-function includePath (pathA, pathB) {
+function includePath(pathA, pathB) {
   if (pathA.indexOf(pathB) === 0) {
     const next = pathA.substr(pathB.length, 1)
     if (next === '[' || next === '.') {
@@ -268,11 +268,11 @@ function includePath (pathA, pathB) {
   return false
 }
 
-function rewriteUpdate (ctx) {
+function rewriteUpdate(ctx) {
   ctx.update = update
 }
 
-function updateByPath (origin, path, value) {
+function updateByPath(origin, path, value) {
   const arr = path.replace(/]/g, '').replace(/\[/g, '.').split('.')
   let current = origin
   for (let i = 0, len = arr.length; i < len; i++) {
@@ -284,7 +284,7 @@ function updateByPath (origin, path, value) {
   }
 }
 
-function pull (cn, where) {
+function pull(cn, where) {
   return new Promise(function (resolve) {
     globalStore.db.collection(cn).where(where || {}).get().then(res => {
       extend(res, cn)
@@ -293,7 +293,7 @@ function pull (cn, where) {
   })
 }
 
-function extend (res, cn) {
+function extend(res, cn) {
   res.data.forEach(item => {
     const mds = globalStore.methods[cn]
     mds && Object.keys(mds).forEach(key => {
@@ -310,17 +310,17 @@ function extend (res, cn) {
   })
 }
 
-function add (cn, data) {
+function add(cn, data) {
   return globalStore.db.collection(cn).add({
     data
   })
 }
 
-function remove (cn, id) {
+function remove(cn, id) {
   return globalStore.db.collection(cn).doc(id).remove()
 }
 
-function diffToPushObj (diffResult) {
+function diffToPushObj(diffResult) {
   const result = {}
   Object.keys(diffResult).forEach(key => {
     diffItemToObj(key, diffResult[key], result)
@@ -328,7 +328,7 @@ function diffToPushObj (diffResult) {
   return result
 }
 
-function diffItemToObj (path, value, result) {
+function diffItemToObj(path, value, result) {
   const arr = path.replace(/]/g, '').replace(/\[/g, '.').split('.')
   const obj = {}
   let current = null
@@ -354,7 +354,7 @@ function diffItemToObj (path, value, result) {
   result[key] = Object.assign(result[key] || {}, obj)
 }
 
-function extendStoreMethod () {
+function extendStoreMethod() {
   globalStore.method = function (path, fn) {
     fnMapping[path] = fn
     let ok = getObjByPath(path)
@@ -370,7 +370,7 @@ function extendStoreMethod () {
   }
 }
 
-function getObjByPath (path) {
+function getObjByPath(path) {
   const arr = path.replace(/]/g, '').replace(/\[/g, '.').split('.')
   const len = arr.length
   if (len > 1) {
@@ -390,7 +390,7 @@ function getObjByPath (path) {
   }
 }
 
-function walk (data) {
+function walk(data) {
   Object.keys(data).forEach(key => {
     const obj = data[key]
     const tp = type(obj)
@@ -410,7 +410,7 @@ function walk (data) {
   })
 }
 
-function _walk (obj, path) {
+function _walk(obj, path) {
   const tp = type(obj)
   if (tp == FUNCTIONTYPE) {
     setProp(path, obj)
@@ -427,7 +427,7 @@ function _walk (obj, path) {
   }
 }
 
-function setProp (path, fn) {
+function setProp(path, fn) {
   const ok = getObjByPath(path)
   fnMapping[path] = fn
   Object.defineProperty(ok.obj, ok.key, {
@@ -441,6 +441,6 @@ function setProp (path, fn) {
   })
 }
 
-function type (obj) {
+function type(obj) {
   return Object.prototype.toString.call(obj)
 }

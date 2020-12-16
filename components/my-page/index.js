@@ -21,7 +21,7 @@ wx.$create({
     loginLoading: false,
     loginShowModel: null
   },
-  ready () {
+  ready() {
     this.setData({ pageMenuInfo: wx.$menu })
     this.data.dark && wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -33,15 +33,15 @@ wx.$create({
     })
   },
   pageLifetimes: {
-    hide () {
+    hide() {
       wx.nextTick(() => this.setData({ loginShowModel: false, loginLoading: false }))
     }
   },
   methods: {
-    async bindChenaLogin () {
+    async bindChenaLogin() {
       this.setData({ loginShowModel: !this.data.loginShowModel && (code = (await wx.login())?.code) != undefined || false })
     },
-    async bindLogin (e) {
+    async bindLogin(e) {
       this.setData({ loginLoading: true }, async () => {
         e && e.detail
           && (await wx.$http.user.userLogin({ code, wxUserInfo: e.detail }))
