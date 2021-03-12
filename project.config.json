@@ -21,8 +21,9 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": true,
-    "useMultiFrameRuntime": false,
+    "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -36,13 +37,12 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "skeletonGenerateFilesWithoutConfirm": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.1",
-  "appid": "wxcb8eef20748dd4c3",
-  "projectname": "fit.2.0",
+  "appid": "wxb8cb8645777fdb16",
+  "projectname": "weapp",
   "debugOptions": {
     "hidedInDevtools": []
   },
